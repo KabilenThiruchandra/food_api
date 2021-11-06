@@ -5,7 +5,7 @@ const axios = require("axios");
 
 
 app.get("/search", (req, res) => {
-    console.log(req.query);
+
     var food = "Pizza";
     if (req.query.title) {
         food = req.query.title;
@@ -13,7 +13,7 @@ app.get("/search", (req, res) => {
     } else if(req.query.find){
         food = req.query.find;
     }
-    const apikey1 = "409a26064cda441f8e32ba9609142986";
+    const apikey1 = "334a12db37464cd081c40e693f63a949";
     var querystr = `https://api.spoonacular.com/recipes/guessNutrition?apiKey=${apikey1}&title=${food}`;
     var querystr1 = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${apikey1}&query=${food}`;
 
@@ -31,22 +31,12 @@ app.get("/search", (req, res) => {
 
         axios.get(querystr).then((response) => {
 
-            if(!response.data.status){
-
-                let ret = {
-                    status: false,
-                    message: "Not enough data for an informed guess."
-                };
-
-                res.send(JSON.stringify(ret));
-                return 0;
-            }
           var data2;
           data2 = response;
 
           axios.get(querystr1).then((response) => {    
 
-            if(response.data.status === false){
+            if(data2.data.status){
                 let ret = {
                     status: false,
                     message: "Not enough data for an informed guess."
