@@ -4,7 +4,7 @@ const app = express();
 const axios = require("axios");
 
 
-app.get("/", (req, res) => {
+app.get("/search", (req, res) => {
     console.log(req.query);
     var food = "Pizza";
     if (req.query.title) {
@@ -75,6 +75,11 @@ app.get("/", (req, res) => {
     }
 
 });
+
+app.get("/", (req, res) => {
+    res.send('Welcome to foody api');
+});
+
 
 let port = process.env.PORT || 3000;
 app.listen(port, () => {
