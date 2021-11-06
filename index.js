@@ -46,8 +46,7 @@ app.get("/search", (req, res) => {
 
           axios.get(querystr1).then((response) => {    
 
-            if(!response.data.status){
-
+            if(response.data.status === false){
                 let ret = {
                     status: false,
                     message: "Not enough data for an informed guess."
@@ -55,6 +54,7 @@ app.get("/search", (req, res) => {
                 res.send(JSON.stringify(ret));
                 return 0;
             }
+
               let datas = {
                 status : true,
                 calories:  (data2.data.calories.value) ?  data2.data.calories.value : '',
