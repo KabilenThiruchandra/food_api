@@ -13,6 +13,7 @@ app.get("/search", (req, res) => {
     } else if(req.query.find){
         food = req.query.find;
     }
+    
     const apikey1 = "334a12db37464cd081c40e693f63a949";
     var querystr = `https://api.spoonacular.com/recipes/guessNutrition?apiKey=${apikey1}&title=${food}`;
     var querystr1 = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${apikey1}&query=${food}`;
