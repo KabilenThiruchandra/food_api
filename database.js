@@ -1,12 +1,20 @@
-var mysql = require('mysql');
+const mongoose = require('mongoose');
 
-var con = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: ""
+const db = "mongodb+srv://Test:321ewq@cluster0.qxm4b.mongodb.net/SearchHistory?retryWrites=true&w=majority";
+
+mongoose
+.connect(db, {useNewUrlParser: true, useUnifiedTopology: true})
+.then(() => {
+    console.log("Connected to database");
+})
+.catch(()=> {
+    console.log("Error connecting to database");
+})
+
+const historySchema = new mongoose.Schema({
+    title: {type: String}
 });
 
-con.connect(function(err) {
-  if (err) throw err;
-  console.log("Connected!");
-});1
+const searches = mongoose.model('searches', historySchema);
+
+module.exports = searches;

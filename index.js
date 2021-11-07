@@ -2,7 +2,8 @@ const express = require("express");
 const { response } = require("express");
 const app = express();
 const axios = require("axios");
-
+const mongoose = require('mongoose');
+const searches = require('./database');
 
 app.get("/search", (req, res) => {
 
@@ -25,6 +26,18 @@ app.get("/search", (req, res) => {
                 status : true,
                 data : response.data.results
             }
+
+            let save = new searches ({
+                title: food
+            });
+
+            save.save().then(result =>{
+                console.log("Success: " + result);
+            })
+            .catch(error => {
+                console.log("Error: " + error);
+            });
+            
             res.send(JSON.stringify(ress));
         });
 
