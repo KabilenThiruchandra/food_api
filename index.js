@@ -30,7 +30,7 @@ app.get("/search", (req, res) => {
         });
     }
     
-    const apikey1 = "334a12db37464cd081c40e693f63a949";
+    const apikey1 = "16888ed725af4c76bfad2197c7ac275c";
     var querystr = `https://api.spoonacular.com/recipes/guessNutrition?apiKey=${apikey1}&title=${food}`;
     var querystr1 = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${apikey1}&query=${food}`;
 
