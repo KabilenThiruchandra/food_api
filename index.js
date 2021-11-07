@@ -13,6 +13,21 @@ app.get("/search", (req, res) => {
 
     } else if(req.query.find){
         food = req.query.find;
+
+        searches.find({}).exec(function (err, data) {
+            if (err) {
+                console.log(err);
+                console.log('error returned');
+            }
+
+            if (data.length >= 5){
+                searches.deleteOne({title: data[0].title}, function(err) {
+                    if (err) { 
+                        console.log('Error: ' + err);
+                    }
+                });
+            }
+        });
     }
     
     const apikey1 = "334a12db37464cd081c40e693f63a949";
@@ -32,10 +47,10 @@ app.get("/search", (req, res) => {
             });
 
             save.save().then(result =>{
-                console.log("Success: " + result);
+                // console.log("Success: " + result);
             })
             .catch(error => {
-                console.log("Error: " + error);
+                // console.log("Error: " + error);
             });
             
             res.send(JSON.stringify(ress));
