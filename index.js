@@ -95,6 +95,17 @@ app.get("/search", (req, res) => {
 
 });
 
+app.get("/recent-searches", (req, res) => {
+    searches.find({}).select('title -_id').exec(function (err, data) {
+        if (err) {
+            console.log(err);
+            console.log('error returned');
+        }
+
+        res.send(JSON.stringify(data));
+    });
+});
+
 app.get("/", (req, res) => {
     res.send('Welcome to foody api');
 });
